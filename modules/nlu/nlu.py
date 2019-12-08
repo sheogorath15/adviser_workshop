@@ -448,21 +448,7 @@ class HandcraftedNLU(Module):
             print('No language')
 
     def _match_hard_coded_regexes(self, user_utterance: str):
-
-        if self.language == Language.ENGLISH:
-            domains = {'ImsCourses': '(lecture|course)(s)?',
-                       'ImsLecturers': '(lecturer|teacher|instructor|professor)(s)?'
-                       }
-        elif self.language == Language.GERMAN:
-            domains = {'ImsCourses': '(kurs(e)?|vorlesung(en)?)',
-                       'ImsLecturers': '(dozent|lehrbeauftragter|lehrperson)(en)?'}
-        regex_alterantives = "(what|which|welche) " + domains[self.domain_name]
-        # print(user_utterance, regex_alterantives)
-
-        if re.search(regex_alterantives, user_utterance, re.I):
-            user_act_type = UserActionType.RequestAlternatives
-            user_act = UserAct(act_type=user_act_type, text=user_utterance)
-            self.user_acts.append(user_act)
+        pass
 
 
     def forward(self, dialog_graph: DialogSystem, user_utterance: str = None,

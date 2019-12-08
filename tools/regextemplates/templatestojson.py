@@ -73,5 +73,6 @@ def create_json_from_template(domain: JSONLookupDomain, template_filename: str):
 
 
 if __name__ == '__main__':
-    dom = JSONLookupDomain('ImsLecturers')
-    create_json_from_template(dom, '/home/mo/Job/ADvISER/diasys/adviser/resources/regexes/ImsLecturers.nlu')
+    # TODO add command line arguments
+    dom = JSONLookupDomain('superhero')
+    create_json_from_template(dom, 'resources/regexes/superhero.nlu')
