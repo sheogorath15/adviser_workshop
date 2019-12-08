@@ -61,14 +61,12 @@ class ConsoleInput(Module):
                   to the kwargs
         """
 
-        utterance = ''
         if self.language == None:
             self.language = Language.ENGLISH
-        else:
-            if dialog_graph.num_turns > 0:
-                while utterance.strip() == '':
-                    utterance = input('>>> ')  # this method blocks
-                self.logger.dialog_turn('User Utterance: %s' % utterance)
+        utterance = ''
+        while not dialog_graph.num_turns == 0 and utterance.strip() == '':
+            utterance = input('>>> ')  # this method blocks
+            self.logger.dialog_turn('User Utterance: %s' % utterance)
         return {'user_utterance': utterance, 'language': self.language}
 
 

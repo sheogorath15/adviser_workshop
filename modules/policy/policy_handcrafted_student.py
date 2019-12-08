@@ -24,7 +24,7 @@ from utils import SysAct, SysActionType
 from utils.logger import DiasysLogger
 from utils import useract as u
 from utils.beliefstate import BeliefState
-from policy_handcrafted import HandcraftedPolicy
+from modules.policy.policy_handcrafted import HandcraftedPolicy
 
 
 class HandcraftedStudentPolicy(HandcraftedPolicy):
@@ -96,7 +96,7 @@ class HandcraftedStudentPolicy(HandcraftedPolicy):
         if user_acts is None and self.turn == 0:
             sys_act = SysAct()
             sys_act.type = SysActionType.Welcome
-            return sys_act
+            return {'sys_act': sys_act}
 
         ###############################################################################
         # TODO: add reactions to the different general user acts here                 #

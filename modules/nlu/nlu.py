@@ -473,12 +473,8 @@ class HandcraftedNLU(Module):
         """
 
         first_turn = dialog_graph.num_turns == 0 if dialog_graph is not None else False
-        if first_turn:
-            self.language = Language.ENGLISH
-            self._initialize()
-        if "language" in kwargs and kwargs['language'] is not None:
-            self.language = kwargs["language"]
-            self._initialize()
+        self.language = Language.ENGLISH
+        self._initialize()
 
         # Setting request everything to False at every turn
         self.req_everything = False

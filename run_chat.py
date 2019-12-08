@@ -34,11 +34,12 @@ from modules.nlu import HandcraftedNLU
 from modules.bst import HandcraftedBST
 from modules.nlg import HandcraftedNLG
 from modules.policy.policy_handcrafted import HandcraftedPolicy
+from modules.policy.policy_handcrafted_student import HandcraftedStudentPolicy
 from modules.surfaces import ConsoleInput, ConsoleOutput
 from utils.domain.jsonlookupdomain import JSONLookupDomain
 
 
-def start_dialog(domain_name: str, logger: DiasysLogger):
+def start_dialog(domain_name: str, logger: DiasysLogger, default_policy: bool):
     """ Start chat with system.
 
     Args:
@@ -53,7 +54,10 @@ def start_dialog(domain_name: str, logger: DiasysLogger):
     input_module = ConsoleInput(domain, logger=logger)
     nlu = HandcraftedNLU(domain=domain, logger=logger)
     bst = HandcraftedBST(domain=domain, logger=logger)
-    policy = HandcraftedPolicy(domain=domain, logger=logger)
+    if default_policy:
+        policy = HandcraftedPolicy(domain=domain, logger=logger)
+    else:
+        policy = HandcraftedStudentPolicy(domain=domain, logger=logger)
     nlg = HandcraftedNLG(domain=domain, logger=logger)
     output_module = ConsoleOutput(domain, logger=logger)
 
@@ -61,9 +65,9 @@ def start_dialog(domain_name: str, logger: DiasysLogger):
     ds = DialogSystem(
         input_module,
         nlu,
-        bst,
         policy,
         nlg,
+        bst,
         output_module,
         logger=logger)
 
@@ -77,10 +81,12 @@ if __name__ == '__main__':
                         help="single domain choice: IMSCourses |superhero",
                         default='superhero')
     parser.add_argument("-lf", "--logtofile", action="store_true", help="log dialog to filesystem")
+    parser.add_argument("-dp", "--default_policy", action="store_true", help="use default policy implementation")
     args = parser.parse_args()
 
     # init logger
     file_log_lvl = LogLevel.DIALOGS if args.logtofile else LogLevel.NONE
-    logger = DiasysLogger(console_log_lvl=LogLevel.DIALOGS, file_log_lvl=file_log_lvl)
+    logger = DiasysLogger(console_log_lvl=LogLevel.NONE, file_log_lvl=file_log_lvl)
+
    
-    start_dialog(domain_name=args.domain, logger=logger)
+    start_dialog(domain_name=args.domain, logger=logger, default_policy=args.default_policy)
