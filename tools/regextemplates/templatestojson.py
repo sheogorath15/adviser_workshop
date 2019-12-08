@@ -18,11 +18,10 @@
 ###############################################################################
 
 import os, sys
+import argparse
 
-head_location = os.path.realpath(os.curdir)
-end = head_location.find('adviser')
-head_location = head_location[:end]
-sys.path.append(head_location + "/adviser")
+head_location = os.path.realpath(os.path.join(os.curdir))
+sys.path.append(head_location)
 
 import json
 from utils.domain.jsonlookupdomain import JSONLookupDomain
@@ -73,6 +72,8 @@ def create_json_from_template(domain: JSONLookupDomain, template_filename: str):
 
 
 if __name__ == '__main__':
-    # TODO add command line arguments
-    dom = JSONLookupDomain('superhero')
-    create_json_from_template(dom, 'resources/regexes/superhero.nlu')
+    parser = argparse.ArgumentParser()
+    parser.add_argument("domain", help="domain name and *.nlu template name: e.g. IMSCourses |superhero")
+    args = parser.parse_args()
+    dom = JSONLookupDomain(args.domain)
+    create_json_from_template(dom, f'resources/regexes/{args.domain}.nlu')
