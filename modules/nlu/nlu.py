@@ -510,16 +510,3 @@ class HandcraftedNLU(Module):
         self.logger.dialog_turn("User Actions: %s" % str(self.user_acts))
         return {'user_acts': self.user_acts}
 
-
-if __name__ == "__main__":
-    domain = JSONLookupDomain(
-        'ImsCourses',
-        os.path.join('resources', 'databases', 'ImsCourses-rules.json'),
-        os.path.join('resources', 'databases', 'ImsCourses-dbase.db'))
-    nlu = HandcraftedNLU(domain=domain)
-    print(nlu.forward(None, user_utterance='tell me everything about smt')['user_acts'])
-    print(len(nlu.forward(None, user_utterance='tell me everything about smt')['user_acts']))
-    print(nlu.forward(None, user_utterance='vu'))
-    print(nlu.forward(None, user_utterance='his time'))
-    print(nlu.forward(None, user_utterance='what courses does agnieska falenska teach'))
-

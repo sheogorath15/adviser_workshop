@@ -15,10 +15,11 @@ template request(loyality): "With which organisation should the superhero be wor
 # Rules for System Inform
 
 function info(slot, value, name)
-	if slot = "loyality": "works with the following organisation: \"{value}\""
-	if slot = "description": "has the following description: \"{value}\""
+	if slot = "loyality": "works with the following organisation: {value}"
+	if slot = "description": "has the following description: {value}"
 	if slot = "main_superpower": "uses \"{value}\""
-	if slot = "primary_uniform_color": "wears a uniform with \"{value}\" as main color"
+	if slot = "primary_uniform_color": "wears a {value} uniform"
+	if slot = "real_name": "their true identity is \"{value}\""
 
 # -------------------------Only Name Slot-----------------------------------#
 
@@ -73,8 +74,8 @@ template reqmore(primary_uniform_color)
 template reqmore(main_superpower)
 	if main_superpower = "dontcare"
 		"Would you like me to look for a superhero using any kind of superpower?"
-template reqmore(loyality)
-	if loyality = "dontcare"
+template reqmore(loyalty)
+	if loyalty = "dontcare"
 		"Would you like me to look for a superhero associated with any organisation?"
 
 # ---------------------------System Select----------------------------------#

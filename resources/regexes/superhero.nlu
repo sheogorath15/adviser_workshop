@@ -61,7 +61,7 @@ rule request(name)
     "(the )?{slot_synonyms("name")}"
     "who .*{slot_synonyms("name")}"
 
-rule request(last_known_locationloyalty)
+rule request(last_known_location)
     "{rREQUEST()} {slot_synonyms("last_known_location")}"
     "(?<!{DONTCAREWHAT()})(?<!want ){IT()} {slot_synonyms("last_known_location")}"
     "(?<!{DONTCARE()}){WHAT()} {slot_synonyms("last_known_location")}"
@@ -127,7 +127,7 @@ function slot_synonyms(slot)
         "name of the {domain_vocab()}"
     if slot = "primary_uniform_color"
         "colo(u)?r(s)?"
-        "(primary|main) colo(u)?r(s)?"
+        "(primary|main|uniform) colo(u)?r(s)?"
     if slot = "main_superpower"
         "(main|primary)? skill(s)?"
         "(main|primary)? power(s)?"

@@ -65,9 +65,9 @@ def start_dialog(domain_name: str, logger: DiasysLogger, default_policy: bool):
     ds = DialogSystem(
         input_module,
         nlu,
+        bst,
         policy,
         nlg,
-        bst,
         output_module,
         logger=logger)
 
