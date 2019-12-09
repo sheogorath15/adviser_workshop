@@ -1,0 +1,4 @@
+wrkenv/
+.DS_Store
+*.pyc
+.vscode/

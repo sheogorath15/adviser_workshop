@@ -61,36 +61,14 @@ class ConsoleInput(Module):
                   to the kwargs
         """
 
-        utterance = ''
         if self.language == None:
-            self.language = self._set_language()
-        else:
-            if dialog_graph.num_turns > 0:
-                while utterance.strip() == '':
-                    utterance = input('>>> ')  # this method blocks
-                self.logger.dialog_turn('User Utterance: %s' % utterance)
+            self.language = Language.ENGLISH
+        utterance = ''
+        while not dialog_graph.num_turns == 0 and utterance.strip() == '':
+            utterance = input('>>> ')  # this method blocks
+            self.logger.dialog_turn('User Utterance: %s' % utterance)
         return {'user_utterance': utterance, 'language': self.language}
 
-    def _set_language(self) -> Language:
-        """
-            asks the user to select the language of the system, returning the enum
-            representing their preference, or None if they don't give a recognized
-            input
-
-        """
-
-        utterance = ""
-        print("Please select your language: English or German")
-        while utterance.strip() == "":
-            utterance = input(">>> ")
-        utterance = utterance.lower()
-        if utterance == 'e' or utterance == 'english':
-            return Language.ENGLISH
-        elif utterance == 'g' or utterance == 'german' or utterance == 'deutsch'\
-                or utterance == 'd':
-            return Language.GERMAN
-        else:
-            return None
 
 
 class ConsoleOutput(Module):
