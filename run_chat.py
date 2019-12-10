@@ -77,8 +77,8 @@ def start_dialog(domain_name: str, logger: DiasysLogger, default_policy: bool):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--domain", required=False, choices=['IMSCourses', 'superhero'],
-                        help="single domain choice: IMSCourses |superhero",
+    parser.add_argument("-d", "--domain", required=False, choices=['ImsCourses', 'superhero'],
+                        help="single domain choice: ImsCourses |superhero",
                         default='superhero')
     parser.add_argument("-lf", "--logtofile", action="store_true", help="log dialog to filesystem")
     parser.add_argument("-dp", "--default_policy", action="store_true", help="use default policy implementation")
